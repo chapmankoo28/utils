@@ -1,6 +1,6 @@
 # Utils
 
-This is a collection of functions I often use across projects.
+A collection of utils and configs I reuse across projects.
 
 ## License
 
