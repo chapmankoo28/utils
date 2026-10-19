@@ -1,0 +1,111 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.5.13/schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true,
+    "defaultBranch": "main"
+  },
+  "files": {
+    "ignoreUnknown": true,
+    "includes": [
+      "**",
+      "!!**/*.svg",
+      "!!**/node_modules",
+      "!!**/dist",
+      // shadcn
+      "!!**/src/components/ui",
+      // Astro
+      "!!**/.astro",
+      // TanStack Router or Start
+      "!**/src/routeTree.gen.ts"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "formatWithErrors": false,
+    "attributePosition": "auto",
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 100,
+    "lineEnding": "lf"
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "recommended",
+      "nursery": {
+        "useSortedClasses": {
+          "level": "warn",
+          "fix": "safe",
+          "options": {
+            "functions": ["cn"]
+          }
+        }
+      },
+      "style": {
+        "useBlockStatements": "warn",
+        "useConsistentMemberAccessibility": "error",
+        "useConsistentArrayType": "error",
+        "noInferrableTypes": "error",
+        "noNamespace": "error",
+        "useConsistentObjectDefinitions": "warn"
+      },
+      "suspicious": {
+        "noVar": "error",
+        "noUnknownAtRules": "error"
+      },
+      "complexity": { "useArrowFunction": "error" }
+    },
+    "domains": {
+      "react": "recommended",
+      "tailwind": "recommended",
+      "astro": "recommended"
+    }
+  },
+  "html": {
+    // Astro only: enable full Astro support (parsing, linting, formatting)
+    "experimentalFullSupportEnabled": true
+  },
+  "javascript": {
+    "formatter": {
+      "arrowParentheses": "always",
+      "bracketSameLine": false,
+      "bracketSpacing": true,
+      "delimiterSpacing": false,
+      "jsxQuoteStyle": "double",
+      "quoteProperties": "asNeeded",
+      "quoteStyle": "single",
+      "semicolons": "always",
+      "trailingCommas": "all"
+    }
+  },
+  "json": {
+    "formatter": {
+      "trailingCommas": "none"
+    }
+  },
+  "css": {
+    "linter": {
+      "enabled": true
+    },
+    "parser": {
+      "tailwindDirectives": true
+    }
+  },
+  "assist": { "enabled": true, "actions": { "preset": "recommended" } },
+  "overrides": [
+    {
+      // Astro
+      "includes": ["**/*.astro"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noUnusedImports": "off",
+            "noUnusedVariables": "off"
+          }
+        }
+      }
+    }
+  ]
+}

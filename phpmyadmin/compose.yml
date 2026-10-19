@@ -1,0 +1,49 @@
+# To run this Docker Compose, use:
+# docker compose up -d
+#
+# To stop the containers:
+# docker compose down
+#
+# After running the command, you can check the status of the containers
+# in the Docker Desktop application or by using the command:
+# docker ps
+# docker compose ps
+
+name: mariadb-phpmyadmin
+
+services:
+  mariadb:
+    image: mariadb:11.8
+    container_name: mariadb
+    environment:
+      MARIADB_ROOT_PASSWORD: 1234
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb-data:/var/lib/mysql
+    networks:
+      - main
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin
+    environment:
+      PMA_HOST: mariadb
+      PMA_PORT: 3306
+      UPLOAD_LIMIT: 5M
+      PMA_ARBITRARY: 1
+    ports:
+      - "8080:80"
+    volumes:
+      # Keeps phpMyAdmin logins valid for 30 days.
+      - ./config.user.inc.php:/etc/phpmyadmin/config.user.inc.php
+    networks:
+      - main
+    depends_on:
+      - mariadb
+
+volumes:
+  mariadb-data:
+
+networks:
+  main:
